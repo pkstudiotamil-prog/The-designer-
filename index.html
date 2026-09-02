@@ -51,35 +51,43 @@
   }
   .line-anim{
     position:fixed; inset:-2px; pointer-events:none; z-index:1; overflow:hidden;
+    background-image:linear-gradient(
+      115deg,
+      transparent 0%, transparent 40%,
+      rgba(232,207,143,0.05) 47%,
+      rgba(232,207,143,0.10) 50%,
+      rgba(232,207,143,0.05) 53%,
+      transparent 60%, transparent 100%
+    );
+    background-size:320% 320%;
+    animation:sheenSweep 20s ease-in-out infinite;
   }
   .line-anim::before, .line-anim::after{
-    content:""; position:absolute; inset:-40% -20%;
-    background-image:repeating-linear-gradient(
-      118deg,
-      rgba(205,162,63,0.09) 0px,
-      rgba(205,162,63,0.09) 1px,
-      transparent 1px,
-      transparent 148px
-    );
-    animation:driftLines 46s linear infinite;
+    content:""; position:absolute; border-radius:50%;
+    filter:blur(8px);
+  }
+  .line-anim::before{
+    width:62vmax; height:62vmax; top:-18%; left:-14%;
+    background:radial-gradient(circle at 35% 35%, rgba(205,162,63,0.20), rgba(205,162,63,0) 62%);
+    animation:floatOrbA 32s ease-in-out infinite;
   }
   .line-anim::after{
-    background-image:repeating-linear-gradient(
-      62deg,
-      rgba(205,162,63,0.05) 0px,
-      rgba(205,162,63,0.05) 1px,
-      transparent 1px,
-      transparent 220px
-    );
-    animation:driftLinesRev 64s linear infinite;
+    width:54vmax; height:54vmax; bottom:-22%; right:-12%;
+    background:radial-gradient(circle at 60% 60%, rgba(201,67,43,0.16), rgba(201,67,43,0) 62%);
+    animation:floatOrbB 40s ease-in-out infinite;
   }
-  @keyframes driftLines{
-    from{ transform:translate3d(0,0,0); }
-    to{ transform:translate3d(148px,148px,0); }
+  @keyframes sheenSweep{
+    0%{ background-position:130% -20%; }
+    50%{ background-position:-30% 120%; }
+    100%{ background-position:130% -20%; }
   }
-  @keyframes driftLinesRev{
-    from{ transform:translate3d(0,0,0); }
-    to{ transform:translate3d(-220px,220px,0); }
+  @keyframes floatOrbA{
+    0%, 100%{ transform:translate3d(0,0,0) scale(1); }
+    50%{ transform:translate3d(6vw,7vh,0) scale(1.14); }
+  }
+  @keyframes floatOrbB{
+    0%, 100%{ transform:translate3d(0,0,0) scale(1); }
+    50%{ transform:translate3d(-7vw,-6vh,0) scale(1.1); }
   }
   .vignette{
     position:fixed; inset:0; pointer-events:none; z-index:1;
